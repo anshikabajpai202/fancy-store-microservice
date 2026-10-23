@@ -1,116 +1,162 @@
-# Monolith to Microservices
+# Fancy Store — Monolith to Microservices
 
-## NOTE: This is not an officially supported Google product
+A cloud-native learning project exploring the transition from a monolithic application to a microservices architecture using Google Cloud technologies.
 
-## Introduction
+This project is based on Google's **Monolith to Microservices** codelab and demonstrates how an application can be organized into independent services and deployed using containerization and Kubernetes.
 
-### This project is used by the Google Cloud Platform team to demonstrate different services within Google Cloud. This project contains two versions of the same application, one architected as a monolith and the other as a set of microservices
+## Project Overview
 
-## Setup
+Traditional monolithic applications combine multiple functionalities into a single application. A microservices architecture separates these functionalities into smaller services that can be developed, deployed, and managed independently.
 
-### **NOTE:** Make sure you have a newer version of NodeJS (16.13.0) or newer (in Cloud Shell you can run `nvm install --lts`)
+The Fancy Store project explores this transition through three main components:
 
-```bash
-git clone https://github.com/googlecodelabs/monolith-to-microservices
-cd monolith-to-microservices
-./setup.sh
+* **Monolith:** The original application architecture.
+* **Microservices:** Separate Orders and Products services, along with the frontend service.
+* **React Frontend:** The user interface that communicates with the application services.
+
+## Architecture
+
+```text
+                 ┌──────────────────────┐
+                 │     React Frontend   │
+                 │      (Frontend)      │
+                 └──────────┬───────────┘
+                            │
+                 ┌──────────┴───────────┐
+                 │                      │
+       ┌─────────▼────────┐   ┌─────────▼────────┐
+       │  Orders Service  │   │ Products Service │
+       └──────────────────┘   └──────────────────┘
 ```
 
-## Monolith
+The frontend communicates with the Orders and Products services through configured API endpoints. The exact routing depends on the deployment configuration.
 
-### To run the monolith project use the following commands from the top level directory
+## Technologies Used
+
+* **Frontend:** React.js, JavaScript, HTML, CSS
+* **Backend:** Node.js
+* **Containers:** Docker
+* **Container Orchestration:** Kubernetes
+* **Cloud Platform:** Google Cloud Platform (GCP)
+* **Container Deployment:** Google Kubernetes Engine (GKE)
+* **Build and Image Management:** Google Cloud Build and Container Registry, as used in the original lab workflow
+* **Version Control:** Git and GitHub
+
+*The technologies listed describe the project and its original learning workflow. The repository itself does not imply that a cloud deployment is currently running.*
+
+## Repository Structure
+
+```text
+fancy-store-microservice/
+│
+├── monolith/
+│   └── Original monolithic application
+│
+├── microservices/
+│   └── Orders, Products, and frontend service code
+│
+├── react-app/
+│   └── React frontend application
+│
+├── README.md
+├── LICENSE
+├── CONTRIBUTING.md
+└── .gitignore
+```
+
+The exact contents of each directory may vary. Refer to the individual folders for their implementation details.
+
+## Getting Started
+
+### Prerequisites
+
+Install the following tools before running the application locally:
+
+* Node.js
+* npm
+* Git
+
+For cloud deployment, additional requirements include an appropriately configured Google Cloud project, permissions, and the necessary cloud resources.
+
+### Clone the Repository
 
 ```bash
-cd monolith
+git clone https://github.com/anshikabajpai202/fancy-store-microservice.git
+```
+
+Navigate to the project directory:
+
+```bash
+cd fancy-store-microservice
+```
+
+### Run the React Frontend
+
+Navigate to the frontend directory:
+
+```bash
+cd react-app
+```
+
+Install the dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
 npm start
 ```
 
-You should see output similar to the following
+Open the local address displayed in the terminal. For a standard Create React App configuration, this is usually:
 
 ```text
-Monolith listening on port 8080!
+http://localhost:3000
 ```
 
-#### That's it! You now have a perfectly functioning monolith running on your machine
+**Note:** Running the frontend alone does not guarantee that Orders and Products functionality will work. The corresponding services and API routing must also be configured and available.
 
-### Docker - Monolith
+## Cloud Deployment
 
-#### To create a Docker image for the monolith, execute the following commands
+The original Google Cloud learning workflow explores the following stages:
 
-```bash
-cd monolith
-docker build -t monolith:1.0.0 .
-```
+1. Build a container image for the monolithic application.
+2. Create a Kubernetes cluster using Google Kubernetes Engine.
+3. Build separate container images for the Orders and Products services.
+4. Deploy the services to Kubernetes.
+5. Configure the frontend to communicate with the services.
+6. Build and deploy the frontend container.
 
-To run the Docker image, execute the following commands
+Cloud deployment requires suitable Google Cloud resources, permissions, configuration, and potentially billable services.
 
-```bash
-docker run --rm -p 8080:8080 monolith:1.0.0
-```
+The original lab environment may be temporary. Cloning this repository does not recreate the cloud infrastructure or guarantee a live website.
 
-## Microservices
+## Learning Outcomes
 
-### To run the microservices project use the following commands from the top level directory
+This project provides practical exposure to:
 
-```bash
-cd microservices
-npm start
-```
+* Understanding monolithic and microservices architectures.
+* Organizing application components into separate services.
+* Working with Docker containers and container images.
+* Learning Kubernetes deployment concepts.
+* Exploring Google Cloud Build and Google Kubernetes Engine.
+* Configuring frontend communication with backend services.
+* Managing project code using Git and GitHub.
 
-You should see output similar to the following
+## Acknowledgment
 
-```text
-[0] Frontend microservice listening on port 8080!
-[2] Orders microservice listening on port 8081!
-[1] Products microservice listening on port 8082!
-```
+This project is based on Google's **Monolith to Microservices** codelab and is intended for educational and portfolio purposes.
 
-### That's it! You now have a perfectly functioning set of microservices running on your machine
+Original learning resource: [Google Codelabs — Monolith to Microservices](https://github.com/googlecodelabs/monolith-to-microservices)
 
-### Docker - Microservices
+## Author
 
-### To create a Docker image for the microservices, you will have to create a Docker image for each service. Execute the following commands for each folder under the microservices folder
+**Anshika Bajpai**
 
-```bash
-cd microservices/src/frontend
-docker build -t frontend:1.0.0 .
+GitHub: [@anshikabajpai202](https://github.com/anshikabajpai202)
 
-cd ../products
-docker build -t products:1.0.0 .
+---
 
-cd ../orders
-docker build -t orders:1.0.0 .
-```
 
-To run the Docker image, execute the following commands
-
-```bash
-docker run -d --rm -p 8080:8080 monolith:1.0.0
-docker run -d --rm -p 8081:8081 orders:1.0.0
-docker run -d --rm -p 8082:8082 products:1.0.0
-```
-
-#### To stop the containers, you will need to find the CONTAINER ID for each and stop them individually. See the steps below
-
-```bash
-docker ps -a
-
-CONTAINER ID        IMAGE                        COMMAND                CREATED
-4c01db0b339c        frontend:1.0.0               bash                   17 seconds ago
-d7886598dbe2        orders:1.0.0                 bash                   17 seconds ago
-d85756f57265        products:1.0.0               bash                   17 seconds ago
-
-docker stop 4c01db0b339c
-docker stop d7886598dbe2
-docker stop d85756f57265
-```
-
-## React App
-
-### The react-app folder contains a React application created from `create-react-app`. You can modify this fronted, but afterwards, you will need to build and move the static files to the monolith and microservices project. You can do this by running the standard create-react-app build command below
-
-```bash
-npm run build
-```
-
-#### This will run the build script to create the static files two times. The first will build with relative URLs and copy the static files to the monolith/public folder. The second run will build with the standard microservices URLs and copy the static files to the microservices/src/frontend/public folder
