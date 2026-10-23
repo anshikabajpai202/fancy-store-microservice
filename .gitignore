@@ -7,3 +7,5 @@
 .DS_Store
 
 /logsreact-app/.env
+
+react-app/.env
