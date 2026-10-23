@@ -1,68 +1,110 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Fancy Store – React Frontend
+
+The React frontend for the **Fancy Store Microservices Project**, a learning project based on Google's Monolith to Microservices codelab.
+
+This application provides the frontend interface and communicates with the Orders and Products services through configured API endpoints.
+
+## Features
+
+* React-based frontend.
+* Integration with Orders and Products services.
+* Environment-based API configuration.
+* Development and production build support.
+
+## Tech Stack
+
+* React.js
+* JavaScript
+* Node.js and npm
+* HTML and CSS
+
+## Project Structure
+
+```text
+react-app/
+├── public/
+├── src/
+├── package.json
+├── package-lock.json
+├── .env.monolith
+└── README.md
+```
+
+*Note: The exact files and folders may vary depending on the project configuration.*
+
+## Prerequisites
+
+Install the following before running the application:
+
+* Node.js
+* npm
+
+## Getting Started
+
+### 1. Navigate to the frontend directory
+
+```bash
+cd react-app
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure API endpoints
+
+Configure the appropriate environment settings for your deployment.
+
+For the monolith configuration, the API paths are:
+
+```text
+REACT_APP_ORDERS_URL=/service/orders
+REACT_APP_PRODUCTS_URL=/service/products
+```
+
+Ensure the configuration matches the environment in which the application will run.
+
+### 4. Run the development server
+
+```bash
+npm start
+```
+
+Open `http://localhost:3000` in your browser.
+
+### 5. Create a production build
+
+```bash
+npm run build
+```
+
+This generates an optimized production build in the `build/` directory.
 
 ## Available Scripts
 
-In the project directory, you can run:
+| Command         | Description                     |
+| --------------- | ------------------------------- |
+| `npm start`     | Starts the development server.  |
+| `npm test`      | Runs the configured test suite. |
+| `npm run build` | Creates a production build.     |
 
-### `npm start`
+## Deployment
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The frontend can be built for deployment to a suitable web server or cloud hosting environment.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+For microservices deployment, configure the API endpoints and routing to match the Orders and Products services.
 
-### `npm test`
+## Related Project Components
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* `monolith/` – Original monolithic application.
+* `microservices/` – Microservices implementation.
+* `react-app/` – React frontend.
 
-### `npm run build`
+## Acknowledgment
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This project is based on the learning material from Google's Monolith to Microservices codelab.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+The repository is intended for learning and portfolio purposes. A running deployment requires the appropriate application configuration and infrastructure.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
